@@ -4,6 +4,12 @@ def main():
     
     file = 'PatternCount_TestData.txt'
     seq, pattern = get_params(file)
+    kmer_freq = count_kmer_freq(seq, pattern)
+    
+    print(kmer_freq)
+    
+    
+def count_kmer_freq(seq, pattern):
     
     count = 0
     for i in range(len(seq)-len(pattern)+1):
@@ -11,7 +17,7 @@ def main():
         if kmer == pattern:
             count += 1
             
-    print(count)
+    return count
     
     
 def get_params(file):
