@@ -6,21 +6,21 @@ def main():
     seq, k = get_params(file)
     
     kmer_counts = calc_kmer_counts(seq, k)
-    frequent_kmers = find_frequent_kmers(kmer_counts)
+    max_kmer_count = max(list(kmer_counts.values()))
+    frequent_kmers = find_frequent_kmers(kmer_counts, max_kmer_count)
 
     print(frequent_kmers)
     print(' '.join(frequent_kmers))
     
     
-def find_frequent_kmers(kmer_counts):
+def find_frequent_kmers(kmer_counts, min_counts):
     """Collect the most frequent kmers from the kmer_counts dictionary.
     Returns:
         frequent_kmers = list --> contains all kmers that had a frequency matching the 
         maximum kmer frequency (of the same kmer size) in the sequence.
     """
-    
-    max_kmer_count = max(list(kmer_counts.values()))
-    frequent_kmers = [kmer for kmer in kmer_counts if kmer_counts[kmer] == max_kmer_count]
+
+    frequent_kmers = [kmer for kmer in kmer_counts if kmer_counts[kmer] >= min_counts]
     
     return frequent_kmers
     
